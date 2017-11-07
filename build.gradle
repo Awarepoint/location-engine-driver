@@ -1,0 +1,41 @@
+buildscript {
+    ext {
+        springBootVersion = '1.5.8.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'idea'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+    maven { url 'http://nexus.awarepoint.com:8081/nexus/content/groups/public/' }
+    maven { url 'http://nexus.awarepoint.com:8081/nexus/content/repositories/thirdparty/' }
+}
+
+
+dependencies {
+    compile 'org.springframework.boot:spring-boot-starter'
+    compile 'com.awarepoint.locationengine:location-engine-configuration-api:2.5.1'
+    compile 'com.awarepoint.locationengine:location-engine-server-input-api:2.5.1'
+    compile 'com.awarepoint.locationengine:location-engine-output-api:2.5.1'
+}
+
+bootRun {
+    systemProperties = System.properties
+}
+
+springBoot {
+    executable = true
+}
